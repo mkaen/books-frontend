@@ -110,6 +110,26 @@ export const useBooksStore = defineStore('books', {
             } catch (error) {
                 console.error(`Cannot return book id ${bookId}`);
             }
+        },
+        async bookActivityHandle(bookId) {
+            try {
+                const response = await book_api.patch(`/activity/${bookId}`);
+                if (response.status === 200) {
+                    const responseData = response.data.data;
+                    console.log(`Successfully changed book activity to ${responseData}`);
+                    // const book = this.bookList.find(b => b.id === this.id);
+                    // console.log(book.id)
+                    for (const key in this.bookList) {
+                        const book = this.bookList[key];
+                        if (book.id === bookId) {
+                            book["isActive"] = responseData;
+                            return true;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 })

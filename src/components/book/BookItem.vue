@@ -7,9 +7,8 @@
         <h5>Description:</h5>
         <h6>{{description}}</h6>
       </div>
-      <div class="buttons" v-if="user.isLoggedIn">
+      <div v-if="user.isLoggedIn">
         <button v-if="canReserve" class="btn btn-outline-primary" @click="reserveBook">Reserve</button>
-        <button v-if="canRemove" class="btn btn-outline-danger" @click="removeBook">Remove Book</button>
       </div>
     </li>
   </base-card>
@@ -29,9 +28,6 @@ export default {
     isBookOwner() {
       return this.ownerId === this.user.userId;
     },
-    removeBook() {
-      this.bookStore.removeBook(this.id);
-    },
     async reserveBook() {
       try {
         const success = await this.bookStore.reserveBook(this.id);
@@ -47,9 +43,6 @@ export default {
   computed: {
     canReserve() {
       return !this.isReserved && !this.isBookOwner();
-    },
-    canRemove() {
-      return this.isBookOwner() && !this.isReserved;
     },
     isReserved() {
       const book = this.bookStore.bookList.find(b => b.id === this.id);
@@ -73,11 +66,6 @@ h4 {
 }
 li {
   opacity: 1;
-}
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
 }
 button {
   margin: 10px auto;

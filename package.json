@@ -13,8 +13,10 @@
     "bootstrap": "^5.3.5",
     "core-js": "^3.8.3",
     "pinia": "^3.0.2",
+    "primevue": "^4.3.4",
     "vue": "^3.2.13",
     "vue-router": "^4.5.0",
+    "vuejs-confirm-dialog": "^0.5.2",
     "vuex": "^4.1.0"
   },
   "devDependencies": {

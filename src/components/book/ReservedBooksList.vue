@@ -1,6 +1,6 @@
 <template>
   <base-card>
-    <h2 v-if="!hasBooks">You haven't reserve any book yet</h2>
+    <h5 v-if="!hasBooks">You haven't reserved any book yet</h5>
     <ul v-else class="list-group">
       <reserved-book-item v-for="book in reservedBooks"
                           :key="book.id"
@@ -64,9 +64,10 @@ async function returnHandle(bookId) {
 
 
 <style scoped>
-h2 {
+h5 {
   display: flex;
   justify-content: center;
   color: red;
+  font-weight: normal;
 }
 </style>

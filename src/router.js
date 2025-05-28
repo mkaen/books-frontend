@@ -11,10 +11,10 @@ import NotFound from './components/pages/NotFound.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', component: AllTheBooks },
+        { path: '/', component: AllTheBooks, meta: { canSearch: true} },
         { path: '/login', component: LoginUser },
         { path: '/register', component: RegisterUser },
-        { path: '/my_books', component: MyBooks, meta: { requiresAuth: true } },
+        { path: '/my_books', component: MyBooks, meta: { requiresAuth: true, canSearch: true } },
         { path: '/add_new_book', component: AddBook, meta: { requiresAuth: true } },
         { path: '/reserved_books', component: ReservedBooks, meta: { requiresAuth: true } },
         { path: '/:notFound(.*)', component: NotFound }

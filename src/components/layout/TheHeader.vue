@@ -2,6 +2,9 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <router-link to="/" class="navbar-brand">Home</router-link>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item" v-if="userStore.isLoggedIn">
@@ -14,27 +17,34 @@
             <router-link to="/add_new_book" class="nav-link text-success">+Add New Book</router-link>
           </li>
           <li class="nav-item" v-if="!userStore.isLoggedIn">
-              <router-link to="/login" class="nav-link text-primary">Login</router-link>
+            <router-link to="/login" class="nav-link text-primary">Login</router-link>
           </li>
           <li class="nav-item" v-if="!userStore.isLoggedIn">
-              <router-link to="/register" class="nav-link text-success">Sign Up</router-link>
+            <router-link to="/register" class="nav-link text-success">Sign Up</router-link>
           </li>
         </ul>
-        <div class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search Books ..." aria-label="Search">
+        <div class="d-flex align-items-center ms-auto gap-2">
+          <input v-if="canSearch" class="form-control form-control-sm w-auto" type="search" placeholder="Search Books ..."
+              aria-label="Search" style="width: 200px;" v-model="searchStore.searchInput">
+          <button type="button" class="btn btn-outline-primary btn-sm" v-if="userStore.isLoggedIn" @click="logout">
+            Logout, {{ userStore.userName }}
+          </button>
         </div>
-        <button type="button" class="btn btn-outline-primary" v-if="userStore.isLoggedIn" @click="logout">Logout, {{ userStore.userName }}</button>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import useUserStore from "@/store/modules/user/user";
+import {useUserStore, useSearchStore} from "@/store";
 import { useRouter } from "vue-router";
+import {computed} from "vue";
 
 const userStore = useUserStore();
+const searchStore = useSearchStore();
 const router = useRouter();
+
+const canSearch = computed(() => { return router.currentRoute.value.fullPath === '/'; })
 
 async function logout() {
   const success = await userStore.logout();
@@ -42,6 +52,7 @@ async function logout() {
     router.replace('/');
   }
 }
+
 </script>
 
 <style scoped>

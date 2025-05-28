@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', {
         isLoggedIn: (state) => !!state.id,
         userName: (state) => state.name || '',
         userEmail: (state) => state.email || '',
-        lendingDuration: (state) => state.duration || 0,
+        lendingDuration: (state) => state.duration || 28,
         reservedBooks: (state) => state.myReservedBooks || []
     },
     actions: {
@@ -77,6 +77,18 @@ export const useUserStore = defineStore('user', {
             this.name = data.name;
             this.email = data.email;
             this.duration = data.duration;
+        },
+        async setLendingDuration(payload) {
+            try {
+                const response = await user_api.patch(`/change_duration/${this.userId}`, {duration: payload});
+                if (response.status === 200) {
+                    this.duration = payload.duration;
+                    console.log(response.data.message)
+                    return true;
+                }
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 });
