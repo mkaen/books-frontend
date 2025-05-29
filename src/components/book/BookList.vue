@@ -7,6 +7,7 @@
                :author="book.author"
                :description="book.description"
                :img="book.img"
+               :overdue="book.overdue"
                :owner-id="book.ownerId"
                :reserved="book.reservedBooks">
     </book-item>
@@ -18,17 +19,14 @@ import { useBooksStore, useSearchStore } from "@/store";
 const bookStore = useBooksStore();
 const searchStore = useSearchStore();
 import BookItem from "@/components/book/BookItem.vue";
-import {computed} from "vue";
-
-const getActivatedBooks = bookStore.allBooks.filter((b) => b.isActive);
+import { computed } from "vue";
 
 const getFilteredBooks = computed(() => {
   const query = searchStore.searchInput.toLowerCase();
-  console.log(query)
   if (!query) {
-    return getActivatedBooks;
+    return bookStore.allBooks;
   } else {
-    return getActivatedBooks.filter(book => book.title.toLowerCase().includes(query) ||
+    return bookStore.allBooks.filter(book => book.title.toLowerCase().includes(query) ||
         book.author.toLowerCase().includes(query));
   }
 });

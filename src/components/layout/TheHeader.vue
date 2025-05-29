@@ -36,9 +36,9 @@
 </template>
 
 <script setup>
-import {useUserStore, useSearchStore} from "@/store";
+import { useUserStore, useSearchStore } from "@/store";
 import { useRouter } from "vue-router";
-import {computed} from "vue";
+import { computed } from "vue";
 
 const userStore = useUserStore();
 const searchStore = useSearchStore();
@@ -57,7 +57,7 @@ async function logout() {
 
 <style scoped>
 .nav-item :hover {
-  border-left: 5px solid;
+  border-left: 5px groove;
   border-right: 5px solid;
   border-radius: 15px;
 }

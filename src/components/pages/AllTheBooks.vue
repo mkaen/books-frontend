@@ -5,13 +5,18 @@
 
 <script setup>
 import { onMounted } from "vue";
-import { useBooksStore } from "@/store";
+import { useBooksStore, useSearchStore } from "@/store";
 import BookList from "@/components/book/BookList.vue";
+import {onBeforeRouteLeave} from "vue-router";
 
 const bookStore = useBooksStore();
+const searchStore = useSearchStore();
 
 onMounted(() => {
   bookStore.fetchBooks();
+});
+onBeforeRouteLeave(() => {
+  searchStore.searchInput = "";
 })
 </script>
 

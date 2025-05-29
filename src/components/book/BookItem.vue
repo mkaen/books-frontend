@@ -1,5 +1,5 @@
 <template>
-  <base-card>
+  <base-card :class="{'isOverdue': overdue}">
     <li>
       <img :src="img" style="width: 20rem; margin: 20px auto 20px auto" alt="book cover image">
       <h4>{{author}}</h4>
@@ -23,7 +23,7 @@ export default {
       bookStore: useBooksStore()
     }
   },
-  props: ['id', 'title', 'author', 'img', 'description', 'ownerId', 'reserved'],
+  props: ['id', 'title', 'author', 'img', 'description', 'ownerId', 'reserved', 'overdue'],
   methods: {
     isBookOwner() {
       return this.ownerId === this.user.userId;
@@ -71,5 +71,25 @@ button {
   margin: 10px auto;
   display: flex;
   justify-content: space-between;
+}
+.isOverdue {
+  border: 2px solid red;
+  background-color: lightcoral;
+  position: relative;
+  overflow: hidden;
+}
+.isOverdue::after {
+  content: "Overdue";
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  transform: rotate(45deg);
+  padding: 5px 40px;
+  font-size: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 </style>
