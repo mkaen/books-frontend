@@ -39,7 +39,7 @@ export default {
   },
   watch: {
     isActivated(value) {
-      console.log("Lüliti seisund:", value)
+      console.log("Toggle status:", value)
       this.$emit('book-activity', this.id)
     }
   },

@@ -1,20 +1,22 @@
 <template>
   <li class="list-group-item d-flex align-items-center my-2">
     <img :src="img" alt="book cover" style="max-width:70px; max-height:100px;">
-    <h6 class="ms-3 mb-0">{{title}}</h6>
+    <h5 class="ms-3 mb-0">{{title}}</h5>
     <div class="button-group ms-auto" v-if="!lentOut">
       <button class="btn text-bg-danger" @click="cancelReservation()">Cancel Reservation</button>
       <button class="btn text-bg-primary mt-2" @click="markAsReceived()">Mark as Received</button>
     </div>
     <div v-else class="button-group ms-auto">
+      <span>Due date: {{ formattedDate }}</span>
       <button class="btn text-bg-success mt-2" @click="returnBook()">Return Book</button>
     </div>
   </li>
 </template>
 
 <script>
+
 export default {
-  props: ['id', 'title', 'img', 'ownerId', 'reserved', 'lentOut'],
+  props: ['id', 'title', 'img', 'ownerId', 'reserved', 'lentOut', 'returnDate'],
   emits: ['cancel-reservation-id', 'mark-as-received', 'return-book'],
   methods: {
     cancelReservation() {
@@ -25,6 +27,11 @@ export default {
     },
     returnBook() {
       this.$emit('return-book', this.id)
+    }
+  },
+  computed: {
+    formattedDate() {
+      return new Date(this.returnDate).toLocaleDateString('et-EE')
     }
   }
 }

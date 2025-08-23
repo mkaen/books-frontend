@@ -10,6 +10,7 @@
                           :owner-id="book.ownerId"
                           :reserved="book.reserved"
                           :lent-out="book.lentOut"
+                          :return-date="book.returnDate"
                           @cancel-reservation-id="cancelHandle"
                           @mark-as-received="receiveHandle"
                           @return-book="returnHandle">

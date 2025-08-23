@@ -9,7 +9,8 @@
       </div>
       <hr>
     </div>
-    <ul class="list-unstyled">
+    <h5 v-if="myBooksList.length === 0">No books added</h5>
+    <ul v-else class="list-unstyled">
       <my-book-item v-for="book in myBooksList"
                     :key="book.id"
                     :id="book.id"
@@ -23,6 +24,7 @@
                     @book-activity="activityToggle">
       </my-book-item>
     </ul>
+
   </base-card>
 </template>
 
@@ -59,5 +61,11 @@ async function removeBook(bookId) {
 .duration-range {
   padding: 1rem 2rem;
   margin: 2rem auto;
+}
+h5 {
+  display: flex;
+  justify-content: center;
+  color: red;
+  font-weight: normal;
 }
 </style>
