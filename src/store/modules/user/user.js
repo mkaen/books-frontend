@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 import {user_api} from '@/axios'
+import { DEFAULT_LEND_DURATION } from "@/constants";
+
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -14,16 +16,20 @@ export const useUserStore = defineStore('user', {
         isLoggedIn: (state) => !!state.id,
         userName: (state) => state.name || '',
         userEmail: (state) => state.email || '',
-        lendingDuration: (state) => state.duration || 28,
+        lendingDuration: (state) => state.duration || DEFAULT_LEND_DURATION,
         reservedBooks: (state) => state.myReservedBooks || []
     },
     actions: {
         async fetchUser() {
             try {
                 const response = await user_api.get('/current_user');
-                await this.setUserValues(response.data);
+                if (response.status === 200) {
+                    await this.setUserValues(response.data);
+                }
+                else {
+                    await this.resetUserValues();
+                }
             } catch (error) {
-                console.log('Error while fetching user to vue', error);
                 await this.resetUserValues();
             }
         },

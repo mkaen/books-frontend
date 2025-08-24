@@ -41,6 +41,7 @@ const duration = ref(userStore.lendingDuration);
 const myBooksList = computed(() => {
   return bookStore.allBooks.filter(b => b.ownerId === userStore.userId);
 });
+
 async function durationHandler() {
   console.log("Set duration:", duration.value);
   userStore.duration = duration.value;

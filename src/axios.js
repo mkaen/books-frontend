@@ -1,11 +1,18 @@
 import axios from 'axios'
 
+import { API_BASE, API_ENDPOINTS } from "./constants";
+
+const userRoute = API_BASE + API_ENDPOINTS.user
+const booksRoute = API_BASE + API_ENDPOINTS.books
+
+
 const user_api = axios.create({
-    baseURL: 'http://127.0.0.1:5001/user_api',
+    baseURL: userRoute,
     withCredentials: true
 });
+
 const book_api = axios.create({
-    baseURL: 'http://127.0.0.1:5001/book_api',
+    baseURL: booksRoute,
     withCredentials: true
 })
 
