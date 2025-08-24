@@ -83,7 +83,6 @@ export const useUserStore = defineStore('user', {
                 const response = await user_api.patch(`/change_duration/${this.userId}`, {duration: payload});
                 if (response.status === 200) {
                     this.duration = payload.duration;
-                    console.log(response.data.message)
                     return true;
                 }
             } catch (error) {

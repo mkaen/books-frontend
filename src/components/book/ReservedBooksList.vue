@@ -43,13 +43,7 @@ async function cancelHandle(bookId) {
   }
 }
 async function receiveHandle(bookId) {
-  const responseData = await bookStore.receiveBook(bookId);
-  if (responseData) {
-    const book = bookStore.bookList.find(b => b.id === bookId);
-    if (book) {
-      console.log(responseData);
-    }
-  }
+  await bookStore.receiveBook(bookId);
 }
 async function returnHandle(bookId) {
   const responseData = await bookStore.returnBook(bookId);

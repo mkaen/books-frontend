@@ -1,10 +1,13 @@
 import {book_api} from "@/axios";
+import {Book} from "@/models/Book";
 
 export default {
     async fetchBooks() {
         try {
             const response = await book_api.get('/fetch_books');
-            this.bookList = response.data;
+            const data = await response.data
+            console.log(data)
+            this.bookList = data.map(bookData => new Book(bookData));
         } catch (error) {
             console.log(error)
         }
@@ -69,10 +72,14 @@ export default {
         try {
             const response = await book_api.patch(`/receive_book/${bookId}`);
             if (response.status === 200) {
+                const returnDateStr = response.data.returnDate;
+                const [day, month, year] = returnDateStr.split("-");
+                const returnDate = new Date(year, month - 1, day);
                 for (const key in this.bookList) {
                     const book = this.bookList[key];
                     if (book.id === bookId) {
                         book["lentOut"] = true;
+                        book["returnDate"] = returnDate;
                     }
                 }
                 return true;
