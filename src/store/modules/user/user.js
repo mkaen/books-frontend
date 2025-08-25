@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import {user_api} from '@/axios'
+import {user_api} from '@/configuration/axios'
 import { DEFAULT_LEND_DURATION } from "@/constants";
 
 

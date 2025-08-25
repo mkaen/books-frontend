@@ -50,7 +50,6 @@ async function returnHandle(bookId) {
   if (responseData) {
     const book = bookStore.bookList.find(b => b.id === bookId);
     if (book) {
-      console.log(responseData);
       book.lentOut = false;
     }
   }
