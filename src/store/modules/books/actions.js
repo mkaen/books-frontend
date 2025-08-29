@@ -14,7 +14,9 @@ export default {
     },
     async addNewBook(payload) {
         try {
+            console.log(`Payload: ${JSON.stringify(payload)}`);
             const response = await book_api.post('/add_new_book', payload);
+            console.log(response.data.data);
             if (response.status === 201) {
                 this.bookList.push(response.data.data)
                 return true;
