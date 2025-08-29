@@ -7,7 +7,7 @@
                :author="book.author"
                :description="book.description"
                :img="book.img"
-               :overdue="book.overdue"
+               :overdue="book.isOverdue"
                :owner-id="book.ownerId"
                :reserved="book.reservedBooks">
     </book-item>

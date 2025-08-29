@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AllTheBooks from "@/components/pages/AllTheBooks.vue";
 import LoginUser from '@/components/user/authorization/LoginUser.vue'
 import RegisterUser from '@/components/user/authorization/RegisterUser.vue'
-import MyBooks from './components/pages/MyBooks.vue'
-import AddBook from './components/pages/AddNewBook.vue'
-import ReservedBooks from './components/pages/ReservedBooks.vue'
-import NotFound from './components/pages/NotFound.vue'
+import MyBooks from '../components/pages/MyBooks.vue'
+import AddBook from '../components/pages/AddNewBook.vue'
+import ReservedBooks from '../components/pages/ReservedBooks.vue'
+import NotFound from '../components/pages/NotFound.vue'
 
 
 const router = createRouter({
