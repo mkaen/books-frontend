@@ -39,8 +39,8 @@ export default {
   },
   watch: {
     isActivated(value) {
-      console.log("Toggle status:", value)
-      this.$emit('book-activity', this.id)
+      console.log("Toggle status:", value);
+      this.$emit('book-activity', this.id);
     }
   },
   methods: {
