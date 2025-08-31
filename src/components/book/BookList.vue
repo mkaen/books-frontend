@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <book-item v-for="book in getFilteredBooks"
+    <book-item v-for="book in searchStore.getFilteredBooks"
                :key="book.id"
                :title="book.title"
                :id="book.id"
@@ -15,23 +15,9 @@
 </template>
 
 <script setup>
-import {useBooksStore, useSearchStore} from "@/store";
+import { useSearchStore } from "@/store";
 import BookItem from "@/components/book/BookItem.vue";
-import {computed} from "vue";
-
-
-const bookStore = useBooksStore();
 const searchStore = useSearchStore();
-
-const getFilteredBooks = computed(() => {
-  const query = searchStore.searchInput.toLowerCase();
-  if (!query || query.length < 2) {
-    return bookStore.allBooks;
-  } else {
-    return bookStore.allBooks.filter(book => book.title.toLowerCase().includes(query) ||
-        book.author.toLowerCase().includes(query))
-  }
-});
 </script>
 
 <style scoped>

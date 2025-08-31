@@ -24,8 +24,8 @@
           </li>
         </ul>
         <div class="d-flex align-items-center ms-auto gap-2">
-          <input v-if="canSearch" class="form-control form-control-sm w-auto" type="search" placeholder="Search Books/Author ..."
-              aria-label="Search" style="width: 200px;" v-model="searchStore.searchInput">
+          <input v-if="canSearch" class="form-control form-control-sm w-auto" :class="{'search-danger': !searchStore.hasSearchResults}" type="search" placeholder="Search Books/Author ..."
+              aria-label="Search" style="width: 250px;" v-model="searchStore.searchInput">
           <button type="button" class="btn btn-outline-primary btn-sm" v-if="userStore.isLoggedIn" @click="logout">
             Logout, {{ userStore.userName }}
           </button>
@@ -57,5 +57,9 @@ async function logout() {
   border-left: 5px groove;
   border-right: 5px solid;
   border-radius: 15px;
+}
+.search-danger.form-control:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, .25);
 }
 </style>
