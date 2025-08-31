@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import {user_api} from '@/configuration/axios'
+import { user_api } from '@/configuration/axios'
 import { DEFAULT_LEND_DURATION } from "@/constants";
 import router from "@/router/router";
 
@@ -66,9 +66,9 @@ export const useUserStore = defineStore('user', {
             try {
                 const response = await user_api.post('/logout');
                 if (response.status === 200 && !response.data.authenticated) {
+                    console.log("Current user has logged out!");
                     await this.resetUserValues();
                     await router.push({path: "/"});
-                    console.log("Current user has logged out!");
                     return true;
                 }
             } catch (error) {

@@ -1,6 +1,6 @@
-import {book_api} from "@/configuration/axios";
-import {Book} from "@/models/Book";
-import {bookActivation, cancelReservationHelper, receiveBookHelper, reserveBookHandler} from "@/utils/api-utils"
+import { book_api } from "@/configuration/axios";
+import { Book } from "@/models/Book";
+import { bookActivation, cancelReservationHelper, receiveBookHelper, reserveBookHandler } from "@/utils/api-utils"
 
 export default {
     async fetchBooks() {
