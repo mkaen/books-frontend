@@ -29,14 +29,12 @@
 </template>
 
 <script>
-import {useUserStore} from "@/store";
 
 
 export default {
   emits: ['save-data'],
   data() {
     return {
-      userId: useUserStore().userId,
       title: {
         value: "",
         isValid: true
@@ -86,7 +84,6 @@ export default {
         return;
       }
       const bookData = {
-        userId: this.userId,
         title: this.title.value,
         author: this.author.value,
         imageUrl: this.imageUrl.value,
