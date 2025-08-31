@@ -11,3 +11,4 @@ export const API_ENDPOINTS = {
 }
 
 export const DEFAULT_LEND_DURATION = 28;
+export const EMAIL_VALIDATION_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
