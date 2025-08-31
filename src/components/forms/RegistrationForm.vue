@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import {EMAIL_VALIDATION_PATTERN} from "@/constants";
+
 export default {
   emits: ['save-data'],
   data() {
@@ -65,7 +67,7 @@ export default {
     },
     validateForm() {
       this.formIsValid = true
-      const emailValidationPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailValidationPattern = EMAIL_VALIDATION_PATTERN;
       if (this.firstName.value === '') {
         this.firstName.isValid = false;
         this.formIsValid = false;
