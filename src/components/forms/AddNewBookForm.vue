@@ -76,7 +76,6 @@ export default {
         this.description.isValid = false;
         this.formIsValid = false;
       }
-      console.log(this.description.isValid)
     },
     submitForm() {
       this.validateForm();

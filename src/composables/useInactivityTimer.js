@@ -6,7 +6,6 @@ import { APP_CONFIG} from "@/constants";
 export function useInactivityTimer(timeout = APP_CONFIG.sessionTimeout * 60 * 1000) {
     const inactive = ref(false);
     let timer = null;
-    // const userStore = useUserStore();
 
     function resetTimer() {
         inactive.value = false;
