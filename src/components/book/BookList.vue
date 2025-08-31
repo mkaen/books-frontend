@@ -23,7 +23,7 @@ const searchStore = useSearchStore();
 <style scoped>
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 3rem;
 }
 li {
   display: inline-block;

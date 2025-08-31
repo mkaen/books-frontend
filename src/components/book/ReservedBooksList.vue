@@ -63,5 +63,6 @@ h5 {
   justify-content: center;
   color: red;
   font-weight: normal;
+  margin: 0;
 }
 </style>
