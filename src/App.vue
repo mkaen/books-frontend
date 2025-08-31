@@ -31,6 +31,7 @@ html, body {
 }
 body {
   min-height: 100%;
+  padding-bottom: 4rem;
 }
 h1 {
   padding: 40px;
