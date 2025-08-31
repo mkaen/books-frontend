@@ -23,7 +23,7 @@ import { computed } from "vue";
 
 const getFilteredBooks = computed(() => {
   const query = searchStore.searchInput.toLowerCase();
-  if (!query) {
+  if (!query || query.length < 2) {
     return bookStore.allBooks;
   } else {
     return bookStore.allBooks.filter(book => book.title.toLowerCase().includes(query) ||

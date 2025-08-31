@@ -24,7 +24,7 @@
           </li>
         </ul>
         <div class="d-flex align-items-center ms-auto gap-2">
-          <input v-if="canSearch" class="form-control form-control-sm w-auto" type="search" placeholder="Search Books ..."
+          <input v-if="canSearch" class="form-control form-control-sm w-auto" type="search" placeholder="Search Books/Author ..."
               aria-label="Search" style="width: 200px;" v-model="searchStore.searchInput">
           <button type="button" class="btn btn-outline-primary btn-sm" v-if="userStore.isLoggedIn" @click="logout">
             Logout, {{ userStore.userName }}
@@ -47,10 +47,7 @@ const router = useRouter();
 const canSearch = computed(() => { return router.currentRoute.value.fullPath === '/'; })
 
 async function logout() {
-  const success = await userStore.logout();
-  if (success) {
-    router.replace('/');
-  }
+  await userStore.logout();
 }
 
 </script>
