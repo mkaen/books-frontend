@@ -5,15 +5,21 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import TheHeader from "@/components/layout/TheHeader.vue";
+import { useInactivityTimer } from "@/composables/useInactivityTimer";
+import { useUserStore } from "@/store";
+import { watch } from "vue";
 
-export default {
-  name: 'App',
-  components: {
-    TheHeader,
+const { inactive } = useInactivityTimer();
+const user = useUserStore();
+
+watch(inactive, (val) => {
+  if (val && user.isLoggedIn) {
+    alert("Your session has expired")
+    user.logout();
   }
-}
+});
 </script>
 
 <style>
@@ -25,9 +31,6 @@ html, body {
 }
 body {
   min-height: 100%;
-}
-#app {
-  padding-bottom: 4rem;
 }
 h1 {
   padding: 40px;
