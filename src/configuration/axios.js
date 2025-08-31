@@ -16,5 +16,4 @@ const book_api = axios.create({
     withCredentials: true
 })
 
-export {user_api};
-export {book_api};
+export { user_api,book_api };
