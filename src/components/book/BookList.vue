@@ -15,11 +15,13 @@
 </template>
 
 <script setup>
-import { useBooksStore, useSearchStore } from "@/store";
+import {useBooksStore, useSearchStore} from "@/store";
+import BookItem from "@/components/book/BookItem.vue";
+import {computed} from "vue";
+
+
 const bookStore = useBooksStore();
 const searchStore = useSearchStore();
-import BookItem from "@/components/book/BookItem.vue";
-import { computed } from "vue";
 
 const getFilteredBooks = computed(() => {
   const query = searchStore.searchInput.toLowerCase();
@@ -27,7 +29,7 @@ const getFilteredBooks = computed(() => {
     return bookStore.allBooks;
   } else {
     return bookStore.allBooks.filter(book => book.title.toLowerCase().includes(query) ||
-        book.author.toLowerCase().includes(query));
+        book.author.toLowerCase().includes(query))
   }
 });
 </script>
