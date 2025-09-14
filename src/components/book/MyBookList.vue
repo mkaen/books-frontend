@@ -43,10 +43,11 @@ const myBooksList = computed(() => {
 });
 
 async function durationHandler() {
-  console.log("Set duration:", duration.value);
-  userStore.duration = duration.value;
-  const success = await userStore.setLendingDuration(duration.value);
-  console.log(success)
+  if (duration.value !== userStore.duration) {
+    console.log("Set duration:", duration.value);
+    alert(`Lending duration set to: ${duration.value}`);
+    await userStore.setLendingDuration(duration.value);
+  }
 }
 async function activityToggle(data) {
   await bookStore.bookActivityHandle(data);
