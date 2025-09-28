@@ -5,6 +5,17 @@
 
 <script setup>
 import MyBookList from "@/components/book/MyBookList.vue";
+import { onMounted } from "vue";
+import { useBooksStore, useUserStore } from "@/store";
+
+const bookStore = useBooksStore();
+const userStore = useUserStore();
+
+onMounted(async () => {
+  if (userStore.userId) {
+    await bookStore.fetchMyBooks(userStore.userId);
+  }
+});
 
 </script>
 
