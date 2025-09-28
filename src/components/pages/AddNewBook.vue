@@ -1,5 +1,7 @@
 <template>
-  <h1>Add New Book</h1>
+  <div class="page">
+    <h1>Add New Book</h1>
+  </div>
     <base-card>
       <AddNewBookForm @save-data="saveBookData"></AddNewBookForm>
     </base-card>

@@ -1,5 +1,7 @@
 <template>
-  <h1>My Books</h1>
+  <div class="page">
+    <h1>My Books</h1>
+  </div>
   <my-book-list></my-book-list>
 </template>
 

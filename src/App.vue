@@ -25,7 +25,7 @@ watch(inactive, (val) => {
 <style>
 html, body {
   height: 100%;
-  background-image: url('https://images.unsplash.com/photo-1603484477859-abe6a73f9366?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('https://images.unsplash.com/photo-1600420870295-5e00aac0be39?q=80&w=982&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-attachment: fixed;
 }
@@ -34,15 +34,21 @@ body {
   padding-bottom: 4rem;
 }
 h1 {
-  padding: 40px;
+  padding: 20px 40px;
   text-align: center;
   text-decoration: underline;
-  color: royalblue;
   font-family: sans-serif;
   font-style: italic;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
 }
 base-card {
   background-color: rgba(255, 255, 255, 0.3);
 }
-
+.page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
