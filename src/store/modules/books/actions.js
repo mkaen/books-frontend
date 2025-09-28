@@ -12,6 +12,20 @@ export default {
             console.log(error)
         }
     },
+    async fetchMyBooks(userId) {
+      try {
+          const response = await book_api.get(`/user_books/${userId}`);
+          if (response.status === 200) {
+              const data = response.data;
+              this.myBookList = data.map(bookData => new Book(bookData));
+              // console.log(`Successfully fetched user id: ${userId} books`, 200)
+          } else {
+              console.log(`Unable to fetch user id: ${userId} books`, 400)
+          }
+      } catch (error) {
+          console.log(error)
+      }
+    },
     async addNewBook(payload) {
         try {
             const response = await book_api.post('/add_new_book', payload);
@@ -94,5 +108,5 @@ export default {
         } catch (error) {
             console.error(error);
         }
-    }
+    },
 };

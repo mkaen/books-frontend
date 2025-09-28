@@ -9,9 +9,9 @@
       </div>
       <hr>
     </div>
-    <h5 v-if="myBooksList.length === 0">No books added</h5>
+    <h5 v-if="bookStore.myBooks.length === 0">No books added</h5>
     <ul v-else class="list-unstyled">
-      <my-book-item v-for="book in myBooksList"
+      <my-book-item v-for="book in bookStore.myBooks"
                     :key="book.id"
                     :id="book.id"
                     :title="book.title"
@@ -32,15 +32,11 @@
 import MyBookItem from "@/components/book/MyBookItem.vue";
 import BaseCard from "@/components/ui/BaseCard.vue";
 import { useUserStore, useBooksStore } from "@/store";
-import { computed, ref } from "vue";
+import { ref} from "vue";
 const userStore = useUserStore();
 const bookStore = useBooksStore();
 
 const duration = ref(userStore.lendingDuration);
-
-const myBooksList = computed(() => {
-  return bookStore.allBooks.filter(b => b.ownerId === userStore.userId);
-});
 
 async function durationHandler() {
   if (duration.value !== userStore.duration) {
