@@ -32,7 +32,7 @@
 import MyBookItem from "@/components/book/MyBookItem.vue";
 import BaseCard from "@/components/ui/BaseCard.vue";
 import { useUserStore, useBooksStore } from "@/store";
-import { ref} from "vue";
+import {onMounted, ref} from "vue";
 const userStore = useUserStore();
 const bookStore = useBooksStore();
 
@@ -52,6 +52,10 @@ async function activityToggle(data) {
 async function removeBook(bookId) {
   await bookStore.removeBook(bookId);
 }
+
+onMounted(() => {
+  bookStore.fetchCurrentUserBooks(userStore.userId);
+});
 
 </script>
 

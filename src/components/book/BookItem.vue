@@ -24,30 +24,20 @@ export default {
     }
   },
   props: ['id', 'title', 'author', 'img', 'description', 'ownerId', 'reserved', 'overdue'],
+  emits: ['update-reserved'],
   methods: {
     isBookOwner() {
       return this.ownerId === this.user.userId;
     },
     async reserveBook() {
-      try {
-        const success = await this.bookStore.reserveBook(this.id);
-        if (success) {
-          const book = this.bookStore.bookList.find(b => b.id === this.id);
-          book.reserved = true;
-        }
-      } catch (error) {
-        console.error("Reserve failed", error);
-      }
-    }
+      this.$emit('update-reserved', this.id);
+    },
   },
   computed: {
     canReserve() {
-      return !this.isReserved && !this.isBookOwner();
-    },
-    isReserved() {
       const book = this.bookStore.bookList.find(b => b.id === this.id);
-      return book.reserved;
-    }
+      return book && !book.reserved && !this.isBookOwner();
+    },
   }
 }
 </script>

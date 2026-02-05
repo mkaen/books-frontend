@@ -1,6 +1,12 @@
 import { book_api } from "@/configuration/axios";
 import { Book } from "@/models/Book";
-import { bookActivation, cancelReservationHelper, receiveBookHelper, reserveBookHandler } from "@/utils/api-utils"
+import {
+    bookActivation,
+    cancelReservationHelper,
+    receiveBookHelper,
+    reserveBookHandler,
+    returnBookHandler
+} from "@/utils/api-utils"
 
 export default {
     async fetchBooks() {
@@ -12,19 +18,28 @@ export default {
             console.log(error)
         }
     },
-    async fetchMyBooks(userId) {
+    async fetchCurrentUserBooks(userId) {
       try {
           const response = await book_api.get(`/user_books/${userId}`);
           if (response.status === 200) {
               const data = response.data;
               this.myBookList = data.map(bookData => new Book(bookData));
-              // console.log(`Successfully fetched user id: ${userId} books`, 200)
           } else {
               console.log(`Unable to fetch user id: ${userId} books`, 400)
           }
       } catch (error) {
           console.log(error)
       }
+    },
+    async fetchReservedBooksById(userId) {
+        try {
+            const response = await book_api.get(`/reserved_books/${userId}`);
+            if (response.status === 200) {
+                this.myReservedBooks = response.data.map(bookData => new Book(bookData));
+            }
+        } catch (error) {
+            console.log(`Failed to fetch current user reserved books. Error: ${error}`)
+        }
     },
     async addNewBook(payload) {
         try {
@@ -41,6 +56,7 @@ export default {
         try {
             const response = await book_api.delete(`/remove_book/${bookId}`);
             if (response.status === 200) {
+                this.myBookList = this.myBookList.filter(book => book.id !== bookId);
                 this.bookList = this.bookList.filter(book => book.id !== bookId);
                 return true;
             }
@@ -52,8 +68,7 @@ export default {
         try {
             const response = await book_api.patch(`/reserve_book/${id}`)
             if (response.status === 200) {
-                const responseData = response.data.data;
-                reserveBookHandler(responseData, this.bookList);
+                await reserveBookHandler(id, this);
             }
         } catch (error) {
             console.log(error)
@@ -63,7 +78,7 @@ export default {
         try {
             const response = await book_api.patch(`/cancel_reservation/${bookId}`);
             if (response.status === 200) {
-                cancelReservationHelper(bookId, this.bookList);
+                cancelReservationHelper(bookId, this);
             }
         } catch (error) {
             console.log(`Failed to cancel reservation book id: ${bookId}`, error)
@@ -74,7 +89,7 @@ export default {
             const response = await book_api.patch(`/receive_book/${bookId}`);
             if (response.status === 200) {
                 const returnDateStr = response.data.returnDate;
-                receiveBookHelper(returnDateStr, bookId, this.bookList)
+                receiveBookHelper(returnDateStr, bookId, this);
             }
         } catch (error) {
             console.error(`Cannot 'mark as received' book id ${bookId}`);
@@ -84,15 +99,7 @@ export default {
         try {
             const response = await book_api.patch(`/return_book/${bookId}`);
             if (response.status === 200) {
-                for (const key in this.bookList) {
-                    const book = this.bookList[key];
-                    if (book.id === bookId) {
-                        book["lentOut"] = false;
-                        book["reserved"] = false;
-                        book["lenderId"] = null;
-                    }
-                }
-                return true;
+                returnBookHandler(bookId, this);
             }
         } catch (error) {
             console.error(`Cannot return book id ${bookId}`);

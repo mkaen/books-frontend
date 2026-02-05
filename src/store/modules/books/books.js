@@ -4,11 +4,13 @@ import actions from "@/store/modules/books/actions";
 export const useBooksStore = defineStore('books', {
     state: () => ({
         bookList: [],
-        myBookList: []
+        myBookList: [],
+        myReservedBooks: []
     }),
     getters: {
         allBooks: (state) => state.bookList,
-        myBooks: (state) => state.myBookList
+        myBooks: (state) => state.myBookList,
+        reservedBooks: (state) => state.myReservedBooks
     },
     actions
-})
+});

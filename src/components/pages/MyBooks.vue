@@ -15,7 +15,7 @@ const userStore = useUserStore();
 
 onMounted(async () => {
   if (userStore.userId) {
-    await bookStore.fetchMyBooks(userStore.userId);
+    await bookStore.fetchCurrentUserBooks(userStore.userId);
   }
 });
 
