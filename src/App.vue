@@ -25,7 +25,7 @@ watch(inactive, (val) => {
 <style>
 html, body {
   height: 100%;
-  background-image: url('https://images.unsplash.com/photo-1600420870295-5e00aac0be39?q=80&w=982&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('https://images.unsplash.com/photo-1512998844734-cd2cca565822?q=80&w=842&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-attachment: fixed;
 }

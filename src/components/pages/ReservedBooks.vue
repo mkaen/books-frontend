@@ -7,6 +7,16 @@
 
 <script setup>
 import ReservedBooksList from "@/components/book/ReservedBooksList.vue";
+import {onMounted} from "vue";
+import { useBooksStore, useUserStore } from "@/store";
+
+const bookStore = useBooksStore();
+const userStore = useUserStore();
+
+
+onMounted(() => {
+  bookStore.fetchReservedBooksById(userStore.userId);
+});
 </script>
 
 

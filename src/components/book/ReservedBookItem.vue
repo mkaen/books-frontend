@@ -3,12 +3,12 @@
     <img :src="img" alt="book cover" style="max-width:70px; max-height:100px;">
     <h5 class="ms-3 mb-0">{{title}}</h5>
     <div class="button-group ms-auto" v-if="!lentOut">
-      <button class="btn text-bg-danger" @click="cancelReservation()">Cancel Reservation</button>
-      <button class="btn text-bg-primary mt-2" @click="markAsReceived()">Mark as Received</button>
+      <button class="btn text-bg-danger" @click="cancelReservation">Cancel Reservation</button>
+      <button class="btn text-bg-primary mt-2" @click="markAsReceived">Mark as Received</button>
     </div>
     <div v-else class="button-group ms-auto">
       <span>Due date: {{ formattedDate }}</span>
-      <button class="btn text-bg-success mt-2" @click="returnBook()">Return Book</button>
+      <button class="btn text-bg-success mt-2" @click="returnBook">Return Book</button>
     </div>
   </li>
 </template>
@@ -20,13 +20,13 @@ export default {
   emits: ['cancel-reservation-id', 'mark-as-received', 'return-book'],
   methods: {
     cancelReservation() {
-      this.$emit('cancel-reservation-id', this.id)
+      this.$emit('cancel-reservation-id', this.id);
     },
     markAsReceived() {
-      this.$emit('mark-as-received', this.id)
+      this.$emit('mark-as-received', this.id);
     },
     returnBook() {
-      this.$emit('return-book', this.id)
+      this.$emit('return-book', this.id);
     }
   },
   computed: {
