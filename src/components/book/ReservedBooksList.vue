@@ -11,9 +11,9 @@
                           :reserved="book.reserved"
                           :lent-out="book.lentOut"
                           :return-date="book.returnDate"
-                          @cancel-reservation-id="cancelHandle"
-                          @mark-as-received="receiveHandle"
-                          @return-book="returnHandle">
+                          @cancel-reservation-id="cancelReservationHandler"
+                          @mark-as-received="receiveHandler"
+                          @return-book="returnHandler">
       </reserved-book-item>
     </ul>
   </base-card>
@@ -21,38 +21,21 @@
 
 <script setup>
 import ReservedBookItem from "@/components/book/ReservedBookItem.vue";
-import { useUserStore, useBooksStore } from "@/store";
-import {computed} from "vue";
-const userStore =useUserStore();
+import { useBooksStore } from "@/store";
+import { computed } from "vue";
 const bookStore = useBooksStore();
 
+const reservedBooks = computed(() => bookStore.reservedBooks);
 const hasBooks = computed(() => reservedBooks.value.length > 0);
 
-const reservedBooks = computed(() =>
-    bookStore.bookList.filter(book => book.lenderId === userStore.userId)
-);
-
-async function cancelHandle(bookId) {
-  const success = await bookStore.cancelReservation(bookId);
-  if (success) {
-    const book = bookStore.bookList.find(b => b.id === bookId);
-    if (book) {
-      book.reserved = false;
-      book.lenderId = null;
-    }
-  }
+async function cancelReservationHandler(bookId) {
+  await bookStore.cancelReservation(bookId);
 }
-async function receiveHandle(bookId) {
+async function receiveHandler(bookId) {
   await bookStore.receiveBook(bookId);
 }
-async function returnHandle(bookId) {
-  const responseData = await bookStore.returnBook(bookId);
-  if (responseData) {
-    const book = bookStore.bookList.find(b => b.id === bookId);
-    if (book) {
-      book.lentOut = false;
-    }
-  }
+async function returnHandler(bookId) {
+  await bookStore.returnBook(bookId);
 }
 </script>
 

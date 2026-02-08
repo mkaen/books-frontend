@@ -14,7 +14,7 @@
         <input type="url" id="book-cover-url" :class="{ invalid: !imageUrl.isValid }" v-model.trim="imageUrl.value" @blur="clearValidity('imageUrl')">
       </div>
       <div class="form-control">
-        <label for="description"><span>*</span>Description:</label>
+        <label for="description"><span>*</span>Description (Optional):</label>
         <textarea id="description"
                   rows="5"
                   :class="{ invalid: !description.isValid }"
@@ -22,7 +22,6 @@
                   @blur="clearValidity('description')">
         </textarea>
       </div>
-      <span>* Optional field</span>
       <button type="submit" class="btn btn-success">Add New Book</button>
     </form>
   </div>
