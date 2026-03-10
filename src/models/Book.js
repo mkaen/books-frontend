@@ -4,18 +4,13 @@ export class Book {
         this.title = data.title
         this.author = data.author
         this.description = data.description
-        this.img = data.image_url
+        this.img = data.imageUrl
         this.reserved = data.reserved
-        this.lentOut = data.lent_out
+        this.lentOut = data.lentOut
         this.isActive = data.active
-        this.ownerId = data.owner_id
-        this.lenderId = data.lender_id
-        this.returnDate = data.return_date ? new Date(data.return_date) : null
-        this.overdue = data.overdue
-    }
-
-    get isOverdue() {
-        if (!this.returnDate) return false
-        return this.returnDate < new Date()
+        this.ownerId = data.ownerId
+        this.lenderId = data.lenderId
+        this.returnDate = data.returnDate ? new Date(data.returnDate) : null
+        this.isOverdue = data.isOverdue
     }
 }
