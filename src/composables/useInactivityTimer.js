@@ -1,5 +1,5 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
-import { APP_CONFIG} from "@/constants";
+import { APP_CONFIG } from "@/constants";
 
 
 
