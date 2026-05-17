@@ -1,6 +1,5 @@
 <template>
   <base-card :class="{'isOverdue': overdue}">
-    <li>
       <img :src="img" style="width: 20rem; margin: 20px auto 20px auto" alt="book cover">
       <h4>{{author}}</h4>
       <hr>
@@ -11,7 +10,6 @@
       <div v-if="user.isLoggedIn">
         <button v-if="canReserve" class="btn btn-outline-primary" @click="reserveBook">Reserve</button>
       </div>
-    </li>
   </base-card>
 </template>
 
@@ -55,7 +53,7 @@ h4 {
   display: flex;
   justify-content: center;
 }
-li {
+.base-card {
   opacity: 1;
 }
 button {
@@ -74,8 +72,8 @@ button {
   position: absolute;
   top: 20px;
   right: -30px;
-  background-color: red;
-  color: white;
+  background-color: #8b0000;
+  color: #fff;
   font-weight: bold;
   transform: rotate(45deg);
   padding: 5px 40px;

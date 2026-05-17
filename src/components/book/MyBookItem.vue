@@ -1,6 +1,5 @@
 <template>
-  <li>
-    <div class="base-card mb-3" style="max-width: 540px;">
+  <div class="base-card mb-3" style="max-width: 540px;">
       <div class="row g-0 h-100">
         <div class="col-md-4">
           <img :src="img" class="img-fluid rounded-start h-100" alt="book cover" />
@@ -22,8 +21,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </li>
+  </div>
 </template>
 
 <script>

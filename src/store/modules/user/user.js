@@ -106,7 +106,7 @@ export const useUserStore = defineStore('user', {
                     return true;
                 }
             } catch (error) {
-                console.log(error)
+                console.log('Failed to set lending duration', error)
             }
         }
     }
