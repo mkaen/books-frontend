@@ -15,7 +15,6 @@ export default {
   components: {AddNewBookForm},
   methods: {
     async saveBookData(data) {
-      console.log(data)
       const bookStore = useBooksStore();
       const success = await bookStore.addNewBook(data);
       if (success) {
@@ -25,8 +24,3 @@ export default {
   }
 }
 </script>
-
-
-<style scoped>
-
-</style>

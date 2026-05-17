@@ -24,25 +24,36 @@ export const useUserStore = defineStore('user', {
         async fetchUser() {
             try {
                 const response = await user_api.get('/current_user');
+                console.log(response.status);
                 if (response.status === 200) {
+                    console.log(`response.data: ${response.data}`);
                     await this.setUserValues(response.data);
                 }
                 else {
                     await this.resetUserValues();
                 }
             } catch (error) {
+                console.log('Failed to fetch current user', error);
                 await this.resetUserValues();
             }
         },
         async registerUser(payload) {
             try {
                 const response = await user_api.post('/register', payload);
+                const resData = response.data;
                 if (response.status === 201) {
-                    const resData = response.data;
                     await this.setUserValues(resData.data);
                     return true;
                 }
             } catch (error) {
+                if (error.response?.status === 409) {
+                    alert(error.response.data.message || 'User already exists');
+                } else if (error.response?.status === 400) {
+                    alert(error.response.data.message || 'Invalid data');
+                } else {
+                    alert('Registration failed. Please try again.');
+                }
+                console.log(error.response?.status)
                 console.log('Failed to send new user data to backend', error);
             }
         },
@@ -54,7 +65,7 @@ export const useUserStore = defineStore('user', {
                     return true;
                 }
             } catch (error) {
-                if (error.response && error.response.status === 401) {
+                if (error.response?.status === 401) {
                     alert("Invalid e-mail or password. Please try again.")
                 } else {
                 console.log('Error while logging user in', error);
@@ -83,7 +94,7 @@ export const useUserStore = defineStore('user', {
         },
         async setUserValues(data) {
             this.id = data.id;
-            this.name = data.name;
+            this.name = data.firstName;
             this.email = data.email;
             this.duration = data.duration;
         },
@@ -95,7 +106,7 @@ export const useUserStore = defineStore('user', {
                     return true;
                 }
             } catch (error) {
-                console.log(error)
+                console.log('Failed to set lending duration', error)
             }
         }
     }

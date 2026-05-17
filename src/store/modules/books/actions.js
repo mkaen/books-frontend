@@ -15,7 +15,7 @@ export default {
             const data = await response.data
             this.bookList = data.map(bookData => new Book(bookData));
         } catch (error) {
-            console.log(error)
+            console.log('Failed to fetch books', error)
         }
     },
     async fetchCurrentUserBooks(userId) {
@@ -28,7 +28,7 @@ export default {
               console.log(`Unable to fetch user id: ${userId} books`, 400)
           }
       } catch (error) {
-          console.log(error)
+          console.log('Failed to fetch current user books', error)
       }
     },
     async fetchReservedBooksById(userId) {
@@ -71,7 +71,7 @@ export default {
                 await reserveBookHandler(id, this);
             }
         } catch (error) {
-            console.log(error)
+            console.log('Failed to reserve book', error)
         }
     },
     async cancelReservation(bookId) {
@@ -92,7 +92,7 @@ export default {
                 receiveBookHelper(returnDateStr, bookId, this);
             }
         } catch (error) {
-            console.error(`Cannot 'mark as received' book id ${bookId}`);
+            console.error(`Failed to mark as received book id ${bookId}`, error);
         }
     },
     async returnBook(bookId) {
@@ -102,7 +102,7 @@ export default {
                 returnBookHandler(bookId, this);
             }
         } catch (error) {
-            console.error(`Cannot return book id ${bookId}`);
+            console.error(`Failed to return book id ${bookId}`, error);
         }
     },
     async bookActivityHandle(bookId) {
@@ -113,7 +113,7 @@ export default {
                 bookActivation(responseData,bookId,this.bookList);
             }
         } catch (error) {
-            console.error(error);
+            console.error('Failed to activate book', error);
         }
     },
 };

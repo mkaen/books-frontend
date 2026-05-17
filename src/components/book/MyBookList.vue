@@ -11,18 +11,19 @@
     </div>
     <h5 v-if="bookStore.myBooks.length === 0">No books added</h5>
     <ul v-else class="list-unstyled">
-      <my-book-item v-for="book in bookStore.myBooks"
-                    :key="book.id"
-                    :id="book.id"
-                    :title="book.title"
-                    :author="book.author"
-                    :is-active="book.isActive"
-                    :reserved="book.reserved"
-                    :img="book.img"
-                    :duration="userStore.duration"
-                    @remove-book="removeBook"
-                    @book-activity="activityToggle">
-      </my-book-item>
+      <li v-for="book in bookStore.myBooks" :key="book.id">
+        <my-book-item
+          :id="book.id"
+          :title="book.title"
+          :author="book.author"
+          :is-active="book.isActive"
+          :reserved="book.reserved"
+          :img="book.img"
+          :duration="userStore.duration"
+          @remove-book="removeBook"
+          @book-activity="activityToggle"
+        />
+      </li>
     </ul>
 
   </base-card>
