@@ -24,13 +24,16 @@ export const useUserStore = defineStore('user', {
         async fetchUser() {
             try {
                 const response = await user_api.get('/current_user');
+                console.log(response.status);
                 if (response.status === 200) {
+                    console.log(`response.data: ${response.data}`);
                     await this.setUserValues(response.data);
                 }
                 else {
                     await this.resetUserValues();
                 }
             } catch (error) {
+                console.log('Failed to fetch current user', error);
                 await this.resetUserValues();
             }
         },
@@ -62,7 +65,7 @@ export const useUserStore = defineStore('user', {
                     return true;
                 }
             } catch (error) {
-                if (error.response && error.response.status === 401) {
+                if (error.response?.status === 401) {
                     alert("Invalid e-mail or password. Please try again.")
                 } else {
                 console.log('Error while logging user in', error);

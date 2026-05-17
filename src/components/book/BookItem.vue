@@ -1,11 +1,12 @@
 <template>
   <base-card :class="{'isOverdue': overdue}">
     <li>
-      <img :src="img" style="width: 20rem; margin: 20px auto 20px auto" alt="book cover image">
+      <img :src="img" style="width: 20rem; margin: 20px auto 20px auto" alt="book cover">
       <h4>{{author}}</h4>
+      <hr>
       <div v-if="description">
         <h5>Description:</h5>
-        <h6>{{description}}</h6>
+        <span>&nbsp;&nbsp;{{ description }}</span>
       </div>
       <div v-if="user.isLoggedIn">
         <button v-if="canReserve" class="btn btn-outline-primary" @click="reserveBook">Reserve</button>

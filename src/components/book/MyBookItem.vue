@@ -8,6 +8,7 @@
         <div class="col-md-8 d-flex flex-column justify-content-between align-items-center p-3">
           <div class="w-100 text-center mb-3">
             <h5 class="card-title">{{ title }}</h5>
+            <hr>
             <p class="card-text">{{ author }}</p>
           </div>
           <button class="btn btn-outline-danger mt-auto" @click="removeBook">
