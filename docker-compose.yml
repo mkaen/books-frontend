@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build: .
+    container_name: books-fe-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/books-fe
+      - /books-fe/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    command: npm run serve -- --host 0.0.0.0 --port 8080
+    restart: unless-stopped

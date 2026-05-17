@@ -1,17 +1,18 @@
 <template>
   <ul>
-    <book-item v-for="book in searchStore.getFilteredBooks"
-               :key="book.id"
-               :title="book.title"
-               :id="book.id"
-               :author="book.author"
-               :description="book.description"
-               :img="book.img"
-               :overdue="book.isOverdue"
-               :owner-id="book.ownerId"
-               :reserved="book.reserved"
-               @update-reserved="updateReserved">
-    </book-item>
+    <li v-for="book in searchStore.getFilteredBooks"
+        :key="book.id">
+      <book-item :title="book.title"
+                 :id="book.id"
+                 :author="book.author"
+                 :description="book.description"
+                 :img="book.img"
+                 :overdue="book.isOverdue"
+                 :owner-id="book.ownerId"
+                 :reserved="book.reserved"
+                 @update-reserved="updateReserved">
+      </book-item>
+    </li>
   </ul>
 </template>
 
@@ -34,10 +35,13 @@ async function updateReserved(id) {
 ul {
   list-style-type: none;
   padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+  width: 100%;
+  max-width: 40rem;
 }
 a {
   color: #42b983;

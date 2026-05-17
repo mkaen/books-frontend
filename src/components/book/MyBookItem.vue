@@ -1,6 +1,5 @@
 <template>
-  <li>
-    <div class="base-card mb-3" style="max-width: 540px;">
+  <div class="base-card mb-3" style="max-width: 540px;">
       <div class="row g-0 h-100">
         <div class="col-md-4">
           <img :src="img" class="img-fluid rounded-start h-100" alt="book cover" />
@@ -8,6 +7,7 @@
         <div class="col-md-8 d-flex flex-column justify-content-between align-items-center p-3">
           <div class="w-100 text-center mb-3">
             <h5 class="card-title">{{ title }}</h5>
+            <hr>
             <p class="card-text">{{ author }}</p>
           </div>
           <button class="btn btn-outline-danger mt-auto" @click="removeBook">
@@ -21,8 +21,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </li>
+  </div>
 </template>
 
 <script>
