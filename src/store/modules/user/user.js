@@ -37,12 +37,20 @@ export const useUserStore = defineStore('user', {
         async registerUser(payload) {
             try {
                 const response = await user_api.post('/register', payload);
+                const resData = response.data;
                 if (response.status === 201) {
-                    const resData = response.data;
                     await this.setUserValues(resData.data);
                     return true;
                 }
             } catch (error) {
+                if (error.response?.status === 409) {
+                    alert(error.response.data.message || 'User already exists');
+                } else if (error.response?.status === 400) {
+                    alert(error.response.data.message || 'Invalid data');
+                } else {
+                    alert('Registration failed. Please try again.');
+                }
+                console.log(error.response?.status)
                 console.log('Failed to send new user data to backend', error);
             }
         },
@@ -83,7 +91,7 @@ export const useUserStore = defineStore('user', {
         },
         async setUserValues(data) {
             this.id = data.id;
-            this.name = data.name;
+            this.name = data.firstName;
             this.email = data.email;
             this.duration = data.duration;
         },
