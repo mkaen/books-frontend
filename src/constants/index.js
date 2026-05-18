@@ -4,7 +4,7 @@ export const APP_CONFIG = {
     sessionTimeout: 10
 }
 
-export const API_BASE = 'http://127.0.0.1:5001';
+export const API_BASE = process.env.VUE_APP_API_URL;
 export const API_ENDPOINTS = {
     books: '/book_api',
     user: '/user_api'
